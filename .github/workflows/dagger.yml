@@ -16,7 +16,7 @@ jobs:
       - name: Dagger Build & Push
         uses: dagger/dagger-for-github@v5
         with:
-          version: "0.11.0"
+          version: "0.11.9"
           verb: call
           args: build-and-push --registry=$DOCKER_REGISTRY --image-name=$DOCKER_IMAGE_NAME --username=$DOCKER_USERNAME --password=env:DOCKER_PASSWORD --build-context .
         env:

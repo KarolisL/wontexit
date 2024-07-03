@@ -13,20 +13,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Call Dagger Function to build and publish to ghcr.io
+      - name: Dagger Build & Push
         uses: dagger/dagger-for-github@v5
         with:
-          version: "latest"
+          version: "0.11.0"
           verb: call
-          # modify to use different function(s) as needed
-          module: github.com/daggerverse/dagger-ghcr-demo@v0.1.5
-          args: build-and-push --registry=$DOCKER_REGISTRY --image-name=$DOCKER_IMAGE_NAME --username=$DOCKER_USERNAME --password=env:DOCKER_PASSWORD --build-context=.
+          args: build-and-push --registry=$DOCKER_REGISTRY --image-name=$DOCKER_IMAGE_NAME --username=$DOCKER_USERNAME --password=env:DOCKER_PASSWORD --build-context .
         env:
           DOCKER_REGISTRY: ghcr.io
           DOCKER_IMAGE_NAME: ${{ github.repository }}
           DOCKER_USERNAME: ${{ github.actor }}
-          # assumes the container registry password is in
-          # a repository secret named REGISTRY_PASSWORD
-          # set via the GitHub UI/CL
-          DOCKER_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
+          DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
 

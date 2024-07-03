@@ -11,8 +11,8 @@ type Wontexit struct{}
 func (m *Wontexit) Build(ctx context.Context, buildContext *Directory) *Container {
 	return dag.Container().
 		From("bash").
-		WithFile("/Wontexit.sh", buildContext.File("Wontexit.sh")).
-		WithEntrypoint([]string{"/Wontexit.sh"})
+		WithFile("/wontexit.sh", buildContext.File("wontexit.sh")).
+		WithEntrypoint([]string{"/wontexit.sh"})
 }
 
 // Take the built container and push it
